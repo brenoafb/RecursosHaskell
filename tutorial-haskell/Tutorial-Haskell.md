@@ -133,4 +133,97 @@ Para instalar o `cabal`, usamos o comando a seguir.
 $ cabal install --lib HUnit
 ```
 
+Para trabalharmos com programas em vários módulos, podemos desenvolver
+incrementalmente e testar com o GHCi.
+Na pasta com os arquivos `Main.hs` e `Functions.hs`, abra o GHCi com o comando
+`ghci Main`. Isso carregará o arquivo `Main.hs` e todos os módulos
+importados.
 
+```bash
+$ ghci Main
+GHCi, version 8.6.5: http://www.haskell.org/ghc/  :? for help
+Loaded package environment from /home/breno/.ghc/x86_64-linux-8.6.5/environments/default
+[1 of 2] Compiling Functions        ( Functions.hs, interpreted )
+[2 of 2] Compiling Main             ( Main.hs, interpreted )
+Ok, two modules loaded.
+*Main>
+```
+
+A tarefa agora é completar as funções no arquivo `Functions.hs`, que é
+carregado na `Main`.
+
+A função fatorial nos números inteiros não negativos é definida como
+
+```
+f(0) = 1
+f(n) = n * f(n-1).
+```
+
+Em Haskell, podemos usar casamento de padrões para definir funções com
+facilidade.
+Enquanto em uma linguagem imperativa teríamos uma definição do tipo
+
+```
+fac(n) {
+  if (n == 0) {
+    return 1;
+  } else {
+    return n * fac(n-1)
+  }
+}
+```
+
+em Haskell, podemos expressar a definição como
+
+```
+fac 0 = 1
+fac n = n * (fac (n - 1))
+```
+
+Remova a linha `fac = undefined` e insira a definição apresentada.
+Preenchendo essa definição no arquivo e recarregando o GHCi com `:r`, podemos
+testar a nossa função.
+
+```bash
+*Main> :r
+Ok, two modules loaded.
+*Main> fac 0
+1
+*Main> fac 1
+1
+*Main> fac 10
+3628800
+```
+
+Alguns testes automatizados são fornecidos para testar a função em alguns casos.
+Os testes estão no arquivo `Main.hs` e podem ser executados rodando a
+função `main`.
+
+```
+*Main> main
+### Error in:   4
+Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:78:14 in base:GHC.Err
+  undefined, called at ./Functions.hs:10:7 in main:Functions
+### Error in:   5
+Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:78:14 in base:GHC.Err
+  undefined, called at ./Functions.hs:10:7 in main:Functions
+### Error in:   6
+Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:78:14 in base:GHC.Err
+  undefined, called at ./Functions.hs:10:7 in main:Functions
+### Error in:   7
+Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:78:14 in base:GHC.Err
+  undefined, called at ./Functions.hs:10:7 in main:Functions
+Cases: 8  Tried: 8  Errors: 4  Failures: 0
+
+```
+
+Os erros reportados são referentes à função `fib`, que ainda não foi
+definida. Essa tarefa é deixada como exercício.
