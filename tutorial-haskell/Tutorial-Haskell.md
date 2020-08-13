@@ -46,6 +46,7 @@ Podemos definir funções da seguinte forma:
 
 ```bash
 Prelude > square x = x * x
+```
 
 Chamadas de função seguem o padrão `<função> <arg 1> ... <arg n>`.
 
