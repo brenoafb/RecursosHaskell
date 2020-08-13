@@ -10,4 +10,5 @@ A pasta `Videos` contém tutoriais da linguagem.
 Em caso de dúvidas, entre em contato com os monitores.
 
 - Breno Fatureto -- `breno.afb@gmail.com`
+- Eduardo Lemos -- `dudulr10@gmail.com`
 - Luigi Minardi -- `luigiminardim@gmail.com`
