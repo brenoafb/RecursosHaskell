@@ -17,7 +17,7 @@ ou
 wget -qO- https://get.haskellstack.org/ | sh
 ```
 
-Para mais detalhes, ver a [página da ferramenta](https://docs.haskellstack.org/en/stable/README/).
+Para mais detalhes e para instalação no Windows, ver a [página da ferramenta](https://docs.haskellstack.org/en/stable/README/).
 
 ## Configuração de ambiente
 
