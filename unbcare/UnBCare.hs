@@ -314,3 +314,116 @@ quantidadeNecessaria (m, q) e = let q' = consultarMedicamento m e
   in if q' < q
      then (m, q - q')
      else (m, 0)
+
+{- Solução Alternativa -}
+{- module UnBCare where
+
+import ModeloDados
+import Data.List
+
+comprarMedicamento :: Medicamento -> Quantidade -> EstoqueMedicamentos -> EstoqueMedicamentos
+comprarMedicamento x y [] = [(x, y)]
+comprarMedicamento x y xs
+    | x == fst (last xs)   = init xs ++ [(x, (snd (last xs)) + y)]
+    | otherwise = comprarMedicamento x y (init xs) ++ [(last xs)]
+
+
+tomarMedicamento :: Medicamento -> EstoqueMedicamentos -> Maybe EstoqueMedicamentos
+tomarMedicamento _ [] = Nothing
+tomarMedicamento x ((x1, x2):xs)
+    | x == x1 && x2 /= 0   = Just ((x, x2 - 1) : xs)
+    | x == x1 && x2 == 0   = Nothing
+    | otherwise = case tomarMedicamento x xs of
+                    Just xs -> Just ((x1, x2):xs)
+                    Nothing -> Nothing
+
+
+consultarMedicamento :: Medicamento -> EstoqueMedicamentos -> Quantidade
+consultarMedicamento _ [] = 0
+consultarMedicamento x ((x1,x2):xs)
+    | x == x1   = x2
+    | otherwise = consultarMedicamento x xs
+
+
+demandaMedicamentos :: Receituario -> EstoqueMedicamentos
+demandaMedicamentos [] = []
+demandaMedicamentos xs = sortPairUsingFirst ([(x, length y) | (x, y) <- xs])
+
+sortPairUsingFirst :: Ord a => [(a, b)] -> [(a, b)]
+sortPairUsingFirst [] = []
+sortPairUsingFirst (x:xs) = [(a, b) | (a, b) <- xs, a <= fst x] ++ [x] ++ [(a, b) | (a, b) <- xs, a > fst x]
+
+receituarioValido :: Receituario -> Bool
+receituarioValido [] = True
+receituarioValido xs = xs == sortPairUsingFirstSortingSecond xs
+
+planoValido :: PlanoMedicamento -> Bool
+planoValido [] = True
+planoValido xs = xs == sortPairUsingFirstSortingSecond xs
+
+sortPairUsingFirstSortingSecond :: Ord a => Ord b => [(a, [b])] -> [(a, [b])]
+sortPairUsingFirstSortingSecond [] = []
+sortPairUsingFirstSortingSecond (x:xs) = [(a, sort b) | (a, b) <- xs, a < fst x] ++ [(fst x, sort (snd x))] ++ [(a, sort b) | (a, b) <- xs, a > fst x]
+
+
+geraPlanoReceituario :: Receituario -> PlanoMedicamento
+geraPlanoReceituario [] = []
+geraPlanoReceituario r = concatGroupByKey [(t, m) | (t, m) <- sort (makeInvertedPairs r)]
+
+geraReceituarioPlano :: PlanoMedicamento -> Receituario
+geraReceituarioPlano [] = []
+geraReceituarioPlano p = concatGroupByKey [(m, t) | (m, t) <- sort (makeInvertedPairs p)]
+        
+makeInvertedPairs :: [(a, [b])] -> [(b, a)]
+makeInvertedPairs [] = []
+makeInvertedPairs ((x1, []):xs) = makeInvertedPairs xs
+makeInvertedPairs ((x1, x2:x2s):xs) = [(x2, x1)] ++ (makeInvertedPairs ([(x1,x2s)] ++ xs))
+
+makePairs :: [(a, [b])] -> [(a, b)]
+makePairs [] = []
+makePairs ((x1, []):xs) = makePairs xs
+makePairs ((x1, x2:x2s):xs) = [(x1, x2)] ++ (makePairs ([(x1,x2s)] ++ xs))
+
+concatGroupByKey :: Ord a => Ord b => [(a, b)] -> [(a, [b])]
+concatGroupByKey [] = []
+concatGroupByKey (x:xs) = [(fst x, sort ([snd x] ++ sendDataByKey (fst x) xs))] ++ concatGroupByKey (filter (\(a,b) -> a /= fst x) xs)
+
+sendDataByKey :: Ord a => a -> [(a, b)] -> [b]
+sendDataByKey x [] = []
+sendDataByKey z y = map (snd) (takeWhile (\(x,y) -> x == z) y)
+
+executaPlantao :: Plantao -> EstoqueMedicamentos -> Maybe EstoqueMedicamentos
+executaPlantao []  stock = Just stock
+executaPlantao p [] = Nothing
+executaPlantao p stock = (executep (sortPairUsingFirst (makePairs p)) stock)
+    where
+        executep [] stock = Just stock
+        executep p [] = Nothing
+        executep ((time, (action)):xs) stock = case executaCuidado action stock of
+                                               Nothing -> Nothing
+                                               Just stock1 -> executep xs stock1
+
+executaCuidado :: Cuidado -> EstoqueMedicamentos -> Maybe EstoqueMedicamentos
+executaCuidado action stock = case action of
+                              Comprar meds quantity -> Just (comprarMedicamento meds quantity stock)
+                              Medicar meds -> tomarMedicamento meds stock
+
+
+satisfaz :: Plantao -> PlanoMedicamento ->  EstoqueMedicamentos  -> Bool
+satisfaz [] plan stock = False
+satisfaz p [] stock = False
+satisfaz _ _ [] = False
+satisfaz p plan stock = (checkIfPlanWorks (makePairs plan) onlyMedicationP) && ((executaPlantao p stock) /= Nothing)
+    where
+        onlyMedicationP = map (\(x, Medicar m) -> (x,m)) $ filter (\(x, y) -> checkCuidadoMedicar y) (sortPairUsingFirst (makePairs p))
+        checkIfPlanWorks [] [] = True
+        checkIfPlanWorks [] _ = False
+        checkIfPlanWorks _ [] = False
+        checkIfPlanWorks ((time1, med1):planS) ((time2, med2):medicationS)
+            | (time1 == time2) && (med1 == med2)    = True && checkIfPlanWorks planS medicationS
+            | otherwise                             = False
+
+checkCuidadoMedicar :: Cuidado -> Bool
+checkCuidadoMedicar (Medicar _) = True
+checkCuidadoMedicar _ = False
+ -}
