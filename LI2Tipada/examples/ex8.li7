@@ -1,0 +1,14 @@
+int main () {
+
+int j;
+j = 2;
+
+{
+  int i;
+  i = 3;
+}
+
+ j = i;
+ return j;
+
+}

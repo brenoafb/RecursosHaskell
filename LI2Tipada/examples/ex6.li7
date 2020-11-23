@@ -1,0 +1,27 @@
+int main () {
+ int x;
+ int y;
+ int n;
+ n = 50;
+ int z;
+ int w;
+ x = 3;
+ y = 4;
+ z = fSoma(x);
+ w = fSoma(y);
+ return z+w;
+}
+
+
+int fSoma(int n)
+{
+int soma;
+soma = 0;
+int c;
+c = n;
+while (c) {
+  soma = soma + c;
+  c = c - 1;
+ }
+return soma;
+}

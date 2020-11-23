@@ -1,0 +1,14 @@
+void main () {
+  int z;
+  int x;
+  x = 1;
+  int y;
+  y = 0;
+  {
+    int x;
+    x = 2;
+    y = x;
+  }
+  
+  z = x;
+}

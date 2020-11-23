@@ -1,0 +1,9 @@
+int main () {
+ int z ;
+ z = 1;
+ String w;
+ w = "hello";
+ int x;
+ x = z + w;
+ return x;
+}

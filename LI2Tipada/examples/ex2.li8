@@ -1,0 +1,15 @@
+int main () {
+  int i;
+  int j;
+  int k;
+  j = 100;
+  k = 20;
+  i = soma (j,k);
+  return i ;
+}
+
+int soma (int a, int b) {
+  int r;
+  r = a + b + j;
+  return r;
+}

@@ -1,0 +1,11 @@
+int main () {
+ int z;
+ z = 1;
+ String w;
+ w = "hello";
+ String v; 
+ v= "world";
+ String a;
+ a = w ++ v;
+ return 0;
+}
