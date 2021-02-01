@@ -13,4 +13,4 @@ https://discord.gg/hXjwhWp
 Em casos mais extremos ou particulares, utilize os seguintes e-mails:
 
 - Breno Fatureto -- `breno.afb@gmail.com`
-- Eduardo Lemos -- `dudulr10@gmail.com`
+- Danilo Raposo -- `danilo-raposo@hotmail`
