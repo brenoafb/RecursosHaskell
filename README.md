@@ -8,7 +8,7 @@ A pasta `Videos` contém tutoriais da linguagem.
 
 Para aumentar o contato entre os alunos e os monitores, foi criado um servidor na plataforma Discord:
 
-https://discord.gg/hXjwhWp
+https://discord.gg/TNcDcbZrdb
 
 Em casos mais extremos ou particulares, utilize os seguintes e-mails:
 
